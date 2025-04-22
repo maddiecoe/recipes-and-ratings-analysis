@@ -99,3 +99,12 @@ Above are box plots of how the number of ingredients compares to the duration of
 | 21+               | 49.3214 | 50.6863 | 64.7979 | 69.7297 |
 
 This table shows the average cooking time for recipes based on the number of ingredients and cooking steps. It reveals a clear trend that recipes with more ingredients and steps tend to take longer to cook. By analyzing these patterns, we can gain insights into how recipe complexity influences cooking time.
+
+
+## Framing a Prediction Problem
+
+For this project, the prediction problem is a regression task, where the goal is to predict the cooking time, or the **minutes** of a recipe. I chose cooking time as the response variable because it directly correlates with the complexity and preparation time involved in making a recipe. By understanding how various factors such as the number of steps and ingredients affect cooking time, I can help users select recipes that fit their available time.
+
+The evaluation metrics for the final model are Root Mean Squared Error (RMSE) and Mean Absolute Error (MAE). RMSE penalizes larger errors more heavily, providing an intuitive understanding of the magnitude of prediction errors, while MAE offers a simpler interpretation by calculating the average error. By using both metrics, I can evaluate the performance of the model in different ways, ensuring that the predictions are both accurate and consistent.
+
+At the time of prediction, I would know the number of steps, ingredients, the length of the recipe description, and the year the recipe was submitted. These features are available before the user begins preparing the recipe, ensuring that all information used for prediction is accessible at the point of recipe selection.
