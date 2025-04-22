@@ -64,7 +64,7 @@ Here are the first five rows of the data, post data cleaning, and including only
 |      306168 |         6 |               9 |        40 |
 |      306168 |         6 |               9 |        40 |
 
-##Number of Ingredients##
+**Number of Ingredients**
 
 <iframe
 src="assets/ingredients_distribution.html"
@@ -72,3 +72,30 @@ width="800"
 height="600"
 frameborder="0"
 ></iframe>
+
+
+Above is a histogram of the number of ingredients each recipe calls for. The histogram visualizes this distribution in a nice, interpretable way. As you can see, most recipes call for 8-9 ingredients. This is important to remember as number of ingredients will be used in the model.
+
+
+**Recipe Duration By Number Of Ingredients**
+
+<iframe
+src="assets/duration_by_num_ingredients.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
+
+Above are box plots of how the number of ingredients compares to the duration of cooking time. As you can see, with the more ingredients a recipe calls for, the longer on average a recipe takes. However, this isn't precise and needs to be explored more in the model.
+
+**Cooking Time By Ingredient Bin**
+
+| ingredient_bins   |     0-5 |    6-10 |   11-20 |     21+ |
+|:------------------|--------:|--------:|--------:|--------:|
+| 0-5               | 14.1936 | 28.5485 | 39.0072 | 40.9332 |
+| 6-10              | 23.1066 | 35.6865 | 44.5742 | 54.7995 |
+| 11-15             | 31.0787 | 42.1744 | 49.9156 | 59.9454 |
+| 16-20             | 41.3515 | 49.6151 | 54.2731 | 65.4599 |
+| 21+               | 49.3214 | 50.6863 | 64.7979 | 69.7297 |
+
+This table shows the average cooking time for recipes based on the number of ingredients and cooking steps. It reveals a clear trend that recipes with more ingredients and steps tend to take longer to cook. By analyzing these patterns, we can gain insights into how recipe complexity influences cooking time.
