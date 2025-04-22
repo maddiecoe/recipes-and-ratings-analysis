@@ -132,3 +132,25 @@ Given that the cooking times for recipes might vary, this RMSE suggests that the
 Based on the current performance of an RMSE = 22.36 minutes, the baseline model is not ideal in terms of predictive accuracy. While it serves as a solif starting point, its performance could be improved. Improvements could come about with adding more informative features and/or using more advanced algorithms.
 
 
+## Final Model
+
+To improve on the baseline linear regression model, I engineered two additional features:
+- **`len_description`** — This feature captured the length of the recipe description. Recipes with longer descriptions tend to be more detailed, possibly indicating a greater complexity or more steps. This context helped the model differentiate between quick summaries and longer, potentially more time-consuming recipes.
+- **`year_submitted`** — This feature represented the year a recipe was submitted. I cinluded this because newer recipes may favor simplicity as our lifestyles change. 
+
+All four features used in the final model, `n_steps`, `n_ingredients`, `len_description`, and `year_submitted`, are quanititative and did not need any encoding.
+
+**Modeling and Hyperparameters**
+
+For the final model, I selected a **Random Forest Regressor**, which is a tree-based model that is well-suited for caputring non-linear relationships in the data. It did not assume a linear relationship between the selected features and the response variable, making it more flexible. 
+
+I performed a **Grid Search** to tune the following parameters:
+- **`n_estimators`** — Number of trees in the forest (tested values: 100, 200).
+- **`max_depth`** — Maximum depth of each tree (tested values: 5, 10, 20).
+- **`min_samples_split`** — Minimum number of samples required to split an internal node (tested values: 2, 5).
+
+The best performing combination was 200, 20, and 2, in that order.
+
+**Performance**
+
+The final model's RMSE was 0.41 minutes, which is a drastic improvement from the 22.36 RMSE from the baseline model. The Random Forest Regressor, with additional informative features and tuned hyperparameters, significantly reduced prediction error. An RMSE of 0.41 minutes implies that the model can now predict cooking time within less than a minute on average, which is highly accurate for this task.
