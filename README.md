@@ -25,25 +25,50 @@ I merged the **recipes** and **interactions** datasets together into one datafra
 To prepare the dataset for modeling and analysis, I merged and cleaned the **recipes** and **interactions** dataset. The cleaning process focused on aligning these sources and addressing inconsistencies or missing values introduced during user data collection.
 
 **Merging the Datasets**
+
 I performed a left merge to combine the **recipes** and **interactions** datasets. This merge was done according to the id (in **recipes**) and recipe_id (in **interactions**). That way, all of the recipes remained in the dataset, even if they were not reviewed or interacted with. Thus, the full recipe catalog could still be analyzed. 
 
 To do this, I used the merge() function in pandas with how='left' to preserve all rows from the **recipes** table, regardless of whether an interaction existed on it.
 
 **Handling Ratings of 0**
+
 In the original **interactions** dataset, some recipes had a rating of 0. Since ratings are inteded to be on a 1-5 scale, a value of 0 meant that the review was missing, or it was a placeholder value. Thus, this 0 did not actually come from a user interacting with the recipe. Thus, I replaces these 0s with a np.nan. That way, this ensured that these values did not affect the average ratings, and it avoided problems in the model as they were incorrect values.
 
 To do this, I used the replace() function to turn 0s into nans in the **`rating`** column.
 
 **Calculated Average Ratings**
+
 Rather than relying on individual user raings (which may be biased), I computed the average rating for each recipe and added it as a new column. This summary served as a more stable signal of recipe quality, which could help later in analyzing trends of cooking time.
 
 To do this, I first grouped the dataframe by **`recipe_id`** and calculated the mean rating. Then, I mapped those values back into a new **`average_rating`** column in the main dataframe.
 
 **Removing Outliers in Cooking Time**
+
 I noticed that a small portion of recipes had extremely high cooking times, which could heavily skew the model and visualizations. These times were often due to outliers (like slow-cooking recipes), recipes with a high inactive time (like chilling, marinating, etc), or it could even be due to a data entry error. To reduce these outliers' influence in the model, I limited the dataset to the 90th percentile of cooking times, therefore I only kept recipes whose **`minutes`** value was in the bottom 90%. This resulted in more stable modeling, an easier interpretation of trends, and a focus on "everyday" recipes, which was the goal of this analysis.
 
 To do this, I calculated the 90th percentile cutoff for the **`minutes`** column using quantile(0.90), then filtered the dataframe to include only recipes below that value.
 
 **Note**
+
 Due to my handling of the ratings of 0, I did not use any imputation strategies.
 
+**First Five Rows**
+
+Here are the first five rows of the data, post data cleaning, and including only some relevant columns:
+
+|   recipe_id |   n_steps |   n_ingredients |   minutes |
+|------------:|----------:|----------------:|----------:|
+|      333281 |        10 |               9 |        40 |
+|      453467 |        12 |              11 |        45 |
+|      306168 |         6 |               9 |        40 |
+|      306168 |         6 |               9 |        40 |
+|      306168 |         6 |               9 |        40 |
+
+##Number of Ingredients##
+
+<iframe
+src="assets/ingredients_distribution.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
