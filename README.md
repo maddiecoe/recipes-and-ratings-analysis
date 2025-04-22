@@ -108,3 +108,27 @@ For this project, the prediction problem is a regression task, where the goal is
 The evaluation metrics for the final model are Root Mean Squared Error (RMSE) and Mean Absolute Error (MAE). RMSE penalizes larger errors more heavily, providing an intuitive understanding of the magnitude of prediction errors, while MAE offers a simpler interpretation by calculating the average error. By using both metrics, I can evaluate the performance of the model in different ways, ensuring that the predictions are both accurate and consistent.
 
 At the time of prediction, I would know the number of steps, ingredients, the length of the recipe description, and the year the recipe was submitted. These features are available before the user begins preparing the recipe, ensuring that all information used for prediction is accessible at the point of recipe selection.
+
+
+## Baseline Model
+
+The model used for the baseline model was a Linear Regression model, which predicted the cooking time (in minutes) based on the number of steps and ingredients in a recipe. These features were selected for their potential to influence cooking time, as seen in the exploration above, and as recipes with more ingredients or steps logistically require more time.
+
+The features used in the model were:
+- **`n_steps`** — The number of instruction steps in the recipe. This is a continuous variable. 
+- **`n_ingredients`** — The number of ingredients included in the recipe. This is also a continous variable.
+
+Both features are **quantitative**, as they represent counts or measurement that can take any numeric value within reason. No encoding was necessary for these features, because they are already numeric.
+
+**Performance of the Model**
+
+The performance of the baseline model was evaluated using **Root Mean Sequared Error (RMSE)**, which measured the average magnitude of prediction errors. In this case, the baseline model had an RMSE of **22.36 minutes**, meaning that the model's predictions were off by about 22 minutes on average.
+
+
+Given that the cooking times for recipes might vary, this RMSE suggests that the model has significant room for improvement, especially when predicting times for more complex recipes. While functional, the model may not be considered highly accurate for practical use, especially if prediction precision is important.
+
+**Is the Model "Good"?**
+
+Based on the current performance of an RMSE = 22.36 minutes, the baseline model is not ideal in terms of predictive accuracy. While it serves as a solif starting point, its performance could be improved. Improvements could come about with adding more informative features and/or using more advanced algorithms.
+
+
